@@ -15,3 +15,14 @@ dependencies {
     testCompile("junit:junit:4.12")
     testCompile("org.apache.pdfbox:pdfbox:2.0.4")
 }
+
+test {
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        exceptionFormat "full"
+    }
+
+    filter{
+        includeTestsMatching "*AllTestSuite"
+    }
+}
