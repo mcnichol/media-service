@@ -10,8 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
-
 public class TextFileReaderTest {
     public static final String DAT_TEST_FILE = "src/test/resources/data/test.dat";
     @Rule
@@ -19,7 +17,7 @@ public class TextFileReaderTest {
     private TextFileReader textFileReader;
 
     @Before
-    public void setup(){
+    public void setup() {
         textFileReader = new TextFileReader();
     }
 
@@ -39,6 +37,7 @@ public class TextFileReaderTest {
         thrown.expect(InvalidFileType.class);
         thrown.expectMessage("File must be of types [pdf]");
         textFileReader.readFile(dataFile);
-
     }
+
+
 }

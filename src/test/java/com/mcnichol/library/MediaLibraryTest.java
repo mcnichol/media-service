@@ -75,7 +75,6 @@ public class MediaLibraryTest {
         @Override
         public MediaFile readFile(MediaFile mediaFile) throws IOException {
             String stringPath = mediaFile.getPath() + "/" + mediaFile.getFileName();
-
             Path path = Paths.get(stringPath);
 
             createPdf(stringPath);
