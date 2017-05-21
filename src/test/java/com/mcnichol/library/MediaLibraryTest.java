@@ -16,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 
 public class MediaLibraryTest {
@@ -45,6 +47,7 @@ public class MediaLibraryTest {
 
         testfile_1 = new TextFile.TextFileBuilder()
                 .filename(fileName_1)
+                .title("test-title-1")
                 .path(Paths.get(TEST_RESOURCES_URI)).build();
         testfile_2 = new TextFile.TextFileBuilder()
                 .filename(fileName_2)
@@ -71,6 +74,15 @@ public class MediaLibraryTest {
         assertEquals(mediaLibrary.fileCount(), 2);
     }
 
+    @Test
+    public void canGetFileInformation() throws Exception {
+        mediaLibrary.add(testfile_1);
+
+        MediaFile actualTextFile = mediaLibrary.get("test-title-1");
+
+        assertThat(actualTextFile.getTitle(), is("test-title-1"));
+    }
+    
     private class MockTextFileReader implements MediaFileReader {
         @Override
         public MediaFile readFile(MediaFile mediaFile) throws IOException {
@@ -79,7 +91,11 @@ public class MediaLibraryTest {
 
             createPdf(stringPath);
 
-            return new TextFile.TextFileBuilder().path(path).build();
+            return new TextFile.TextFileBuilder()
+                    .path(path)
+                    .title(mediaFile.getTitle())
+                    .filename(mediaFile.getFileName())
+                    .build();
         }
     }
 
