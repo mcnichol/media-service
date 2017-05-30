@@ -5,10 +5,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
@@ -32,6 +29,11 @@ public class MediaLibraryTest {
     private Path filePath_2;
     private TextFile testfile_1;
     private TextFile testfile_2;
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        Files.createDirectories(Paths.get(TEST_RESOURCES_URI));
+    }
 
     @Before
     public void setup() throws IOException {
